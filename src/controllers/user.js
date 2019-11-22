@@ -7,6 +7,12 @@ module.exports = {
     getUsers: (req, res) => {
         userModel.getUsers()
         .then(result => {
+
+            for(i=0; i < result.length; i++){
+                delete result[i].password
+                delete result[i].auth
+            }
+            
             response(res, 200, result)
         })
         .catch(err => {
