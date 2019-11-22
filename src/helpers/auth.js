@@ -8,6 +8,7 @@ const loginModel = require('../models/login')
 module.exports = {
     tokenVerify: (req, res, next) => {
         const token = req.headers.authorization
+        console.log(token)
         JWT.verify(token, process.env.KEYS, (err, result) => {
             if (err && err.name === 'TokenExpiredError') res.send('Token Expired')
             if (err && err.name === 'JsonWebTokenError') res.send('Token Error')
