@@ -47,7 +47,7 @@ module.exports = {
     },
     getSearchSort: (engName, skillName, sortParam, sortChoose, limit, offset) => {
         return new Promise((resolve,reject) =>{
-            pool.query(`SELECT * FROM engineer_skill WHERE eng_name LIKE '%${engName}%'  AND skill_name LIKE '%${skillName}%' ORDER BY ${sortParam} ${sortChoose} LIMIT ${limit} OFFSET ${offset}`, (err,result) => {
+            pool.query(`SELECT * FROM engineer_skill WHERE eng_name LIKE '%${engName}%' AND skill_name LIKE '%${skillName}%' ORDER BY ${sortParam} ${sortChoose} LIMIT ${limit} OFFSET ${offset}`, (err,result) => {
                 if(!err) {
                     resolve(result)
                 } else {
