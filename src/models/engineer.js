@@ -3,7 +3,7 @@ const pool = require('../config/db')
 module.exports = {
     getEng: () => {
         return new Promise((resolve,reject) =>{
-            pool.query('SELECT * FROM engineer LEFT JOIN skill ON skill.id_eng = engineer.id_eng LEFT JOIN showcase ON showcase.id_eng = engineer.id_eng ', (err,result)=> {
+            pool.query('SELECT * FROM engineer_skill', (err,result)=> {
                 if(!err) {
                     resolve(result)
                 } else {

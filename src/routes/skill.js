@@ -1,15 +1,17 @@
 const express = require('express')
 const Route = express.Router()
 
+const {tokenVerify} = require('../helpers/middleware')
+
 const { getSkill, addSkill, updateSkill, deleteSkill } = require('../controllers/skill')
 
 
 
 Route
-    .get('/',getSkill)
-    .post('/',addSkill)
-    .put('/:idskill',updateSkill)
-    .delete('/:idskill',deleteSkill) 
+    .get('/',tokenVerify,getSkill)
+    .post('/',tokenVerify,addSkill)
+    .put('/:idskill',tokenVerify,updateSkill)
+    .delete('/:idskill',tokenVerify,deleteSkill) 
      
 
 module.exports = Route

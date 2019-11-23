@@ -3,18 +3,11 @@ const bcrypt = require('bcryptjs')
 const uuid = require('uuid/v4')
 const JWT = require('jsonwebtoken')
 const loginModel = require('../models/login')
+const moment = require('moment')
 
 
 module.exports = {
-    tokenVerify: (req, res, next) => {
-        const token = req.headers.authorization
-        
-        JWT.verify(token, process.env.KEYS, (err, result) => {
-            if (err && err.name === 'TokenExpiredError') res.send('Token Expired')
-            if (err && err.name === 'JsonWebTokenError') res.send('Token Error')
-            next()    
-        })
-    },
+    
     hashPassword: (data) => {
 
         const random = bcrypt.genSaltSync(10)
@@ -36,17 +29,38 @@ module.exports = {
             }
             
             if (bcrypt.compareSync(passFromReq, passFromSql)) {
-                const token = JWT.sign({pload}, process.env.KEYS, 
-                    {expiresIn: '1000m'})
-                    loginModel.updateToken(token, pload.id_user)
-                    console.log(pload)
-                return token
-                // return "Masuk"
+
+                const tokenDb = JWT.sign({id_user: userData[0].id_user, username: userData[0].username, email: userData[0].email, name: userData[0].name }, process.env.KEYS, { expiresIn: '24h' })
+                let updateDt = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+                
+                loginModel.updateToken(tokenDb, userData[0].id_user, updateDt)
+                
+                return({
+                  success: true,
+                  message: 'Authentication successful!',
+                  token: tokenDb
+                })
+              } else {
+                return({
+                  success: false,
+                  message: 'Authentication failed! Please check the request'
+                })
+              } 
             } else {
-                return "Password wrong!!"
+              return "Wrong username"
             }
-        } else {
-                return "Check your username!!"
-            }
-    }
-}
+          }
+        }
+ //                 const token = JWT.sign({pload}, process.env.KEYS, 
+//                     {expiresIn: '1000m'})
+//                     loginModel.updateToken(token, pload.id_user)
+//                     console.log(pload)
+//                 return token
+//             } else {
+//                 return "Password wrong!!"
+//         }
+//             } else {
+//                 return "Check your username!!"
+//         }
+//     }
+// }

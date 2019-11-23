@@ -26,6 +26,17 @@ module.exports = {
             })
         })
     },
+    getToken: (idUser) => {
+        return new Promise((resolve, reject) => {
+          pool.query(`SELECT auth FROM user WHERE id_user = '${idUser}' `, (err, result) => {
+            if (!err) {
+              resolve(result)
+            } else {
+              reject(new Error(err))
+            }
+          })
+        })
+      },
     offToken: (idUser) => {
         return new Promise( (resolve,reject) =>{
             console.log(idUser)

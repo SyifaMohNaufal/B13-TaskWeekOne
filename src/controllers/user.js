@@ -7,7 +7,7 @@ module.exports = {
     getUsers: (req, res) => {
         userModel.getUsers()
         .then(result => {
-            //hide password and token
+           
             for(i=0; i < result.length; i++){
                 delete result[i].password
                 delete result[i].auth

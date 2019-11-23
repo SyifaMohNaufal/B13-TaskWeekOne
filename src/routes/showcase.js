@@ -1,15 +1,17 @@
 const express = require('express')
 const Route = express.Router()
 
+const {tokenVerify} = require('../helpers/middleware')
+
 const { getShowcase, addShowcase, updateShowcase, deleteShowcase } = require('../controllers/showcase')
 
 
 
 Route
-    .get('/',getShowcase)
-    .post('/',addShowcase)
-    .put('/:idshowcase',updateShowcase)
-    .delete('/:idshowcase',deleteShowcase) 
+    .get('/',tokenVerify,getShowcase)
+    .post('/',tokenVerify,addShowcase)
+    .put('/:idshowcase',tokenVerify,updateShowcase)
+    .delete('/:idshowcase',tokenVerify,deleteShowcase) 
      
 
 module.exports = Route
