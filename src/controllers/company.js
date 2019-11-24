@@ -15,8 +15,10 @@ module.exports = {
     },
     addCompany: (req, res) => {
         const {company_name, company_location, company_desc } = req.body
+        
         const data = {
             company_name,
+            company_logo: req.file.filename,
             company_location,
             company_desc,
             created_At: new Date(),
@@ -35,6 +37,7 @@ module.exports = {
         const { company_name, company_location, company_desc } = req.body
         const data = {
             company_name,
+            company_logo: req.file.filename,
             company_location,
             company_desc,
             updated_At: new Date ()

@@ -9,6 +9,7 @@ const register = require('./routes/register')
 const login = require('./routes/login')
 const showcase = require('./routes/showcase')
 
+
 Route
     .use('/user',user)
     .use('/company',company)
@@ -17,5 +18,6 @@ Route
     .use('/register',register)
     .use('/login',login)
     .use('/showcase',showcase)
+    
 
 module.exports = Route

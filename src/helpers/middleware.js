@@ -11,7 +11,7 @@ module.exports = {
             result = {
                 msg: "Please login or register"
             }
-            Response(res,400,result)
+            response(res,400,result)
         }
 
         var decoded = jwt_decode(token)
