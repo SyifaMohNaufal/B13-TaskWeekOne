@@ -10,7 +10,7 @@ const { getShowcase, addShowcase, updateShowcase, deleteShowcase } = require('..
 Route
     .get('/',tokenVerify,getShowcase)
     .post('/',tokenVerify,addShowcase)
-    .put('/:idshowcase',tokenVerify,updateShowcase)
+    .put('/:ideng',tokenVerify,updateShowcase)
     .delete('/:idshowcase',tokenVerify,deleteShowcase) 
      
 

@@ -1,7 +1,10 @@
 require('dotenv').config()
-const server = require('express')()
+const express = require('express')
+const server = express()
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cors = require('cors')
+// const uploadDir = require('path').join(__dirname + './src/uploads_eng')
 
 const PORT = process.env.PORT
 
@@ -13,12 +16,18 @@ server.listen(PORT, () => {
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({extended:false}))
 server.use(morgan('dev'))
+server.use(cors({
+    origin: '*'
+}))
 
-server.use('/', route)
+
 
 server.get('/', (req,res) => {
     res.send({message: 'Hello Arkademian!'})
 })
+
+server.use('/', route)
+server.use(express.static('src/routes/src'))
 
 module.exports = server
 

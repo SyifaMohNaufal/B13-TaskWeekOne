@@ -10,7 +10,7 @@ const { getSkill, addSkill, updateSkill, deleteSkill } = require('../controllers
 Route
     .get('/',tokenVerify,getSkill)
     .post('/',tokenVerify,addSkill)
-    .put('/:idskill',tokenVerify,updateSkill)
+    .put('/:ideng',tokenVerify,updateSkill)
     .delete('/:idskill',tokenVerify,deleteSkill) 
      
 

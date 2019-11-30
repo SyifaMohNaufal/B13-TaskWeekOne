@@ -2,14 +2,13 @@ const express = require('express')
 const Route = express.Router()
 const multer = require('multer')
 
-
 const {tokenVerify} = require('../helpers/middleware')
 
 const { getCompany, addCompany, updateCompany, deleteCompany } = require('../controllers/company')
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null,'./src/uploads');
+      cb(null,'./src/uploads_comp');
     },
     filename: (req, file, cb) => {
         cb(null,file.originalname);
@@ -36,7 +35,7 @@ const storage = multer.diskStorage({
 
 Route
     .get('/',tokenVerify,getCompany)
-    .post('/',tokenVerify,upload.single('company_logo'),addCompany)
+    .post('/',tokenVerify, upload.single('company_logo'),addCompany)
     .put('/:idcompany',tokenVerify,upload.single('company_logo'),updateCompany)
     .delete('/:idcompany',tokenVerify,deleteCompany)
 

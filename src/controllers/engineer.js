@@ -14,11 +14,14 @@ module.exports = {
         })
     },
     addEng: (req, res) => {
-        const {eng_name, eng_desc, eng_location, eng_dob } = req.body
+        const {eng_name, eng_desc, project, success, eng_location, eng_dob } = req.body
         
         const data = {
             eng_name,
+            eng_image:  'http://localhost:3014/image/'+req.file.filename,
             eng_desc,
+            project,
+            success,
             eng_location,
             eng_dob,
             created_At: new Date(),
@@ -38,6 +41,7 @@ module.exports = {
         const { eng_name, eng_desc, eng_location, eng_dob } = req.body
         const data = {
             eng_name,
+            eng_image:   'http://localhost:3014/image/'+req.file.filename,
             eng_desc,
             eng_location,
             eng_dob,

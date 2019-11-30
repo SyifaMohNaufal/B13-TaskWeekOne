@@ -10,6 +10,7 @@ const login = require('./routes/login')
 const showcase = require('./routes/showcase')
 
 
+
 Route
     .use('/user',user)
     .use('/company',company)
@@ -18,6 +19,6 @@ Route
     .use('/register',register)
     .use('/login',login)
     .use('/showcase',showcase)
+    // .use('/uploads', express.static('/routes./src/uploads_eng'))
     
-
 module.exports = Route
