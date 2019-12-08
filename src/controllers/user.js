@@ -20,12 +20,13 @@ module.exports = {
         })
     },
     addUsers: (req, res) => {
-        const {username, password, email, name} = req.body
+        const {username, password, email, name, level} = req.body
         const data = {
             username,
             password,
             email,
             name,
+            level,
             created_At: new Date(),
             updated_At: new Date()
         }
@@ -45,6 +46,7 @@ module.exports = {
                 password,
                 email,
                 name,
+                level,
                 updated_At: new Date()
             }
             userModel.updateUsers(data, iduser)

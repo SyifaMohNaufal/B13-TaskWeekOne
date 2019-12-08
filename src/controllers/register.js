@@ -6,7 +6,7 @@ const {hashPassword} = require('../helpers/auth')
 
 module.exports = {
     addRegis: (req, res) => {
-        const {username, password, email, name} = req.body
+        const {username, password, email, name, level} = req.body
         
         const passwordHash = hashPassword(password)
         const data = {
@@ -14,6 +14,7 @@ module.exports = {
             password: passwordHash,
             email,
             name,
+            level,
             created_At: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
             updated_At: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
         }
