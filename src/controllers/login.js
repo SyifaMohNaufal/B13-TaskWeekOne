@@ -14,7 +14,7 @@ module.exports = {
 
         try {
             let userData = await getDataLogin(data.username)
-            let result = validationLogin(data,userData)
+            let result = validationLogin(data, userData)
             let result2 = {
                 id: userData[0].id_user,
                 token: result

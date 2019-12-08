@@ -8,6 +8,7 @@ const skill = require('./routes/skill')
 const register = require('./routes/register')
 const login = require('./routes/login')
 const showcase = require('./routes/showcase')
+const project = require('./routes/projects')
 
 
 
@@ -19,6 +20,7 @@ Route
     .use('/register',register)
     .use('/login',login)
     .use('/showcase',showcase)
+    .use('/project',project)
     // .use('/uploads', express.static('/routes./src/uploads_eng'))
     
 module.exports = Route

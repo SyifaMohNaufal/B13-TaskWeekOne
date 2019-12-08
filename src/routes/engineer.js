@@ -5,7 +5,7 @@ const path = require('path')
 
 // const {tokenVerify} = require('../helpers/middleware')
 
-const { getEng, addEng, updateEng, deleteEng, getSearchSort} = require('../controllers/engineer')
+const { getEng, getEngBy, addEng, updateEng, deleteEng, getSearchSort} = require('../controllers/engineer')
 
 const storage = multer.diskStorage({
 
@@ -38,6 +38,7 @@ const storage = multer.diskStorage({
 
 Route
     .get('/',getEng)
+    .get('/:ideng',getEngBy)
     .post('/', upload.single('eng_image'), addEng)
     .put('/:ideng',upload.single('eng_image'), updateEng)
     .delete('/:ideng',deleteEng)

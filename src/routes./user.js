@@ -8,7 +8,7 @@ const { getUsers, addUsers, updateUsers, deleteUsers, findUserId } = require('..
 
 Route
     .get('/',tokenVerify, getUsers)
-    .post('/',tokenVerify,addUsers)
+    .post('/',addUsers)
     .put('/:iduser',tokenVerify,updateUsers)
     .delete('/:iduser',tokenVerify,deleteUsers)
     .get('/:userid',tokenVerify,findUserId)

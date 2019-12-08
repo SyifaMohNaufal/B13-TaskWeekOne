@@ -30,15 +30,19 @@ module.exports = {
             
             if (bcrypt.compareSync(passFromReq, passFromSql)) {
 
-                const tokenDb = JWT.sign({id_user: userData[0].id_user, username: userData[0].username, email: userData[0].email, name: userData[0].name }, process.env.KEYS, { expiresIn: '24h' })
-                let updateDt = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+                // const tokenDb = JWT.sign({id_user: userData[0].id_user, username: userData[0].username, email: userData[0].email, name: userData[0].name }, process.env.KEYS, { expiresIn: '24h' })
+                // let updateDt = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
                 
-                loginModel.updateToken(tokenDb, userData[0].id_user, updateDt)
+                // loginModel.updateToken(tokenDb, userData[0].id_user, updateDt)
+
+                const token = JWT.sign({pload}, process.env.KEYS, {expiresIn: '1000m'})
+                                      loginModel.updateToken(token, pload.id_user)
+                                      console.log(pload)
                 
                 return({
                   success: true,
                   message: 'Authentication successful!',
-                  token: tokenDb
+                  token: token
                 })
               } else {
                 return({

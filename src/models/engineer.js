@@ -12,6 +12,17 @@ module.exports = {
             })
         })
     },
+    getEngBy: (ideng) => {
+        return new Promise((resolve,reject) =>{
+            pool.query('SELECT * FROM engineer_skill where id_eng LIKE ?', ['%'+ideng+'%'], (err,result)=> {
+                if(!err) {
+                    resolve(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
     addEng: (data) => {
         return new Promise((resolve, reject) => {
             pool.query('INSERT INTO engineer SET ?', data, (err, result) => {

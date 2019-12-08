@@ -2,6 +2,7 @@ require('dotenv/config')
 
 const companyModel = require('../models/company')
 const { response } = require('../helpers/helpers')
+const jwt_decode = require('jwt-decode')
 
 module.exports = {
     getCompany: (req, res) => {
@@ -14,6 +15,9 @@ module.exports = {
         })    
     },
     addCompany: (req, res) => {
+        const token=req.header['authorizaton']
+        const  decoded = jwt_decode(token)
+        const iduser = decoded.id_user
         const {company_name, company_location, company_desc } = req.body
         
         const data = {
@@ -21,8 +25,7 @@ module.exports = {
             company_logo: req.file.filename,
             company_location,
             company_desc,
-            created_At: new Date(),
-            updated_At: new Date()
+            id_user: iduser,
         }
         companyModel.addCompany(data)
         .then(result => {
@@ -50,6 +53,30 @@ module.exports = {
             console.log(err)
         })
     },
+    findCompanyById: (req, res) => {
+        const idcompany = req.params.idcompany;
+    
+        companyModel
+          .findCompanyById(idcompany)
+          .then(result => {
+            response(res, 200, result);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      },
+    //   findCompanyByUserName: (req, res) => {
+    //     const userName = req.params.username;
+    
+    //     companyModel
+    //       .findCompanyByUserName(userName)
+    //       .then(result => {
+    //         response(res, 200, result);
+    //       })
+    //       .catch(err => {
+    //         console.log(err);
+    //       });
+    //   },
     deleteCompany: (req, res) => {
         const idcompany = req.params.idcompany
 
