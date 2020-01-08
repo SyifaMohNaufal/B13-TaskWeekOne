@@ -15,7 +15,7 @@ module.exports = {
         }
 
         var decoded = jwt_decode(token)
-        const idUser = decoded.id_user
+        const idUser = decoded.pload.id_user
 
         loginModel.getToken(idUser)
         .then(result => {

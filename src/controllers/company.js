@@ -17,7 +17,7 @@ module.exports = {
     addCompany: (req, res) => {
         const token=req.header['authorizaton']
         const  decoded = jwt_decode(token)
-        const iduser = decoded.id_user
+        const iduser = decoded.pload.id_user
         const {company_name, company_location, company_desc } = req.body
         
         const data = {
@@ -36,7 +36,7 @@ module.exports = {
         })
     },
     updateCompany: (req, res) =>{
-        const idcompany = req.params.idcompany
+        const id_company = req.params.id_company
         const { company_name, company_location, company_desc } = req.body
         const data = {
             company_name,
@@ -45,7 +45,7 @@ module.exports = {
             company_desc,
             updated_At: new Date ()
         }
-        companyModel.updateCompany(data, idcompany)
+        companyModel.updateCompany(data, id_company)
         .then(result => {
             res.json(result)
         })
@@ -54,10 +54,10 @@ module.exports = {
         })
     },
     findCompanyById: (req, res) => {
-        const idcompany = req.params.idcompany;
+        const id_company = req.params.id_company;
     
         companyModel
-          .findCompanyById(idcompany)
+          .findCompanyById(id_company)
           .then(result => {
             response(res, 200, result);
           })
@@ -65,22 +65,22 @@ module.exports = {
             console.log(err);
           });
       },
-    //   findCompanyByUserName: (req, res) => {
-    //     const userName = req.params.username;
+      findCompanyByIduser: (req, res) => {
+        const id_user = req.params.id_user;
     
-    //     companyModel
-    //       .findCompanyByUserName(userName)
-    //       .then(result => {
-    //         response(res, 200, result);
-    //       })
-    //       .catch(err => {
-    //         console.log(err);
-    //       });
-    //   },
+        companyModel
+          .findCompanyByIduser(id_user)
+          .then(result => {
+            response(res, 200, result);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      },
     deleteCompany: (req, res) => {
-        const idcompany = req.params.idcompany
+        const id_company = req.params.id_company
 
-        companyModel.deleteCompany(idcompany)
+        companyModel.deleteCompany(id_company)
         .then(result => {
             res.json(result)
         })

@@ -12,9 +12,9 @@ module.exports = {
             })
         })
     },
-    getProjBy: (idproj) => {
+    getStatus: () => {
         return new Promise((resolve,reject) =>{
-            pool.query('SELECT * FROM project where id_proj LIKE ?', ['%'+idproj+'%'], (err,result)=> {
+            pool.query('SELECT * FROM v_projeng', (err,result)=> {
                 if(!err) {
                     resolve(result)
                 } else {
@@ -23,9 +23,33 @@ module.exports = {
             })
         })
     },
+    getProjBy: (idComp) => {
+        return new Promise((resolve,reject) =>{
+            id_company = `${idComp}`
+            pool.query('SELECT * FROM project WHERE id_company = ?', [id_company], (err,result)=> {
+                if(!err) {
+                    resolve(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
+    
     addProj: (data) => {
         return new Promise((resolve, reject) => {
             pool.query('INSERT INTO project SET ?', data, (err, result) => {
+                if (!err) {
+                    resolve(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
+    addProjeng: (data) => {
+        return new Promise((resolve, reject) => {
+            pool.query('INSERT INTO project_eng SET ?', data, (err, result) => {
                 if (!err) {
                     resolve(result)
                 } else {

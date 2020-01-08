@@ -34,7 +34,9 @@ const storage = multer.diskStorage({
   
 
 Route
-    .get('/',tokenVerify,getCompany)
+    .get('/',
+    // tokenVerify,
+    getCompany)
     .post('/',tokenVerify, upload.single('company_logo'),addCompany)
     .put('/:idcompany',tokenVerify,upload.single('company_logo'),updateCompany)
     .delete('/:idcompany',tokenVerify,deleteCompany)

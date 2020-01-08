@@ -3,24 +3,18 @@ const Route = express.Router()
 
 // const {tokenVerify} = require('../helpers/middleware')
 
-const { getProj, getProjBy, addProj, updateProj, deleteProj } = require('../controllers/projects')
+const { getProj, getProjBy, addProj, addProjeng, updateProj, deleteProj, getStatus } = require('../controllers/projects')
 
 
 
 Route
-    .get('/',
-                // tokenVerify,
-                                    getProj)
-    .get('/:idproj', getProjBy)
-    .post('/',
-                // tokenVerify,
-                                    addProj)
-    .put('/:idproj',
-                 // tokenVerify,
-                                    updateProj)
-    .delete('/:idproj',
-                // tokenVerify,
-                                    deleteProj) 
+    .get('/', getProj)
+    .get('/status', getStatus)
+    .get('/:idComp', getProjBy)
+    .post('/', addProj)
+    .post('/projeng', addProjeng)
+    .put('/:idproj', updateProj)
+    .delete('/:idproj', deleteProj) 
      
 
 module.exports = Route

@@ -35,7 +35,7 @@ module.exports = {
         const data = {
             eng_name,
             eng_username,
-            eng_image:  'http://localhost:3014/image/'+req.file.filename,
+            eng_image:  'http://52.87.164.251:3013/image/'+req.file.filename,
             eng_desc,
             project,
             success,
@@ -60,7 +60,7 @@ module.exports = {
         const data = {
             username_eng,
             eng_name,
-            eng_image:   'http://localhost:3014/image/'+req.file.filename,
+            eng_image:   'http://52.87.164.251:3013/image/'+req.file.filename,
             eng_desc,
             eng_location,
             eng_dob,
@@ -101,6 +101,30 @@ module.exports = {
             console.log(err)
         })
     },
+    getSearchSkill: (req, res) => {
+        let skill_name = req.query.skill_name
+
+        if (skill_name === ''){
+        engModel.getEng()
+        .then(results => {
+            response(res, 200, results)
+        })
+        .catch(err => {
+            console.log(res, 400, err)
+        })
+    } else {
+        engModel.getSearchSkill(skill_name)
+        .then(result => {
+            response(res,200, result)
+        })
+        .catch(err => {
+            result = {
+                Message: "Search error!"
+            }
+            response(res, 400, result)
+        })
+    }
+}
     // findEngByUserName: (req, res) => {
     //     const userName = req.params.username;
     

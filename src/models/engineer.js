@@ -12,6 +12,7 @@ module.exports = {
             })
         })
     },
+    
     getEngBy: (ideng) => {
         return new Promise((resolve,reject) =>{
             pool.query('SELECT * FROM engineer_skill where id_eng LIKE ?', ['%'+ideng+'%'], (err,result)=> {
@@ -73,5 +74,17 @@ module.exports = {
                 }
             })
         })
-    }
+    },
+    getSearchSkill: (skill_name) => {
+        return new Promise((resolve,reject) =>{ 
+            pool.query(`SELECT * FROM engineer_skill WHERE skill_name LIKE '%${skill_name}%' OR eng_name LIKE '%${skill_name}%' OR eng_desc LIKE '%${skill_name}%'`, (err,result) => {
+                if(!err) {
+                    resolve(result)
+                    console.log(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
 }

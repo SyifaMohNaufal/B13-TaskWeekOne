@@ -47,7 +47,7 @@ module.exports = {
     },
     findUserId: (userid) => {
         return new Promise((resolve,reject) =>{
-            pool.query('SELECT * FROM user WHERE id_user LIKE ?', ['%'+userid+'%'], (err,result) => {
+            pool.query('SELECT * FROM user WHERE username = ?', [userid], (err,result) => {
                 if(!err) {
                     resolve(result)
                 } else {

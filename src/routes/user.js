@@ -11,6 +11,6 @@ Route
     .post('/',addUsers)
     .put('/:iduser',tokenVerify,updateUsers)
     .delete('/:iduser',tokenVerify,deleteUsers)
-    .get('/:userid',tokenVerify,findUserId)
+    .get('/:userid',findUserId)
 
 module.exports = Route

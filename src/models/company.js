@@ -23,9 +23,9 @@ module.exports = {
             })
         })
     },
-    updateCompany: (data, idcompany) => {
+    updateCompany: (data, id_company) => {
         return new Promise((resolve,reject) => {
-            pool.query('UPDATE company SET ? WHERE id_company= ?', [data, idcompany], (err,result) => {
+            pool.query('UPDATE company SET ? WHERE id_company= ?', [data, id_company], (err,result) => {
                 if (!err) {
                     resolve(result)
                 } else {
@@ -34,10 +34,11 @@ module.exports = {
             })
         })
     },
-    findCompanyByIdUser: (idUser) => {
+    findCompanyByIduser: (id_user) => {
         return new Promise((resolve, reject) => {
-          id_user = `${idUser}`
-          pool.query('SELECT * FROM company WHERE id_user = ?', [id_user], (err,result) => {
+         
+         console.log(id_user)
+          pool.query('SELECT * FROM company WHERE id_user = ?', id_user, (err,result) => {
             if (!err) {
               resolve(result)
             } else {
@@ -46,21 +47,9 @@ module.exports = {
           })
         })
       },
-    //   findCompanyByUserName: (userName) => {
-    //     return new Promise((resolve, reject) => {
-    //       user = `${userName}`
-    //       pool.query('SELECT * FROM v_company WHERE username = ?', [user], (err,result) => {
-    //         if (!err) {
-    //           resolve(result)
-    //         } else {
-    //           reject(new Error(err))
-    //         }
-    //       })
-    //     })
-    //   },
-    deleteCompany: (idcompany) => {
+    deleteCompany: (id_company) => {
         return new Promise((resolve, reject) => {
-            pool.query('DELETE FROM company WHERE id_company = ?', idcompany, (err, result)=> {
+            pool.query('DELETE FROM company WHERE id_company = ?', id_company, (err, result)=> {
                 if(!err) {
                     resolve(result)
                 } else {

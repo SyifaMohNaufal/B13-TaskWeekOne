@@ -17,7 +17,8 @@ module.exports = {
             let result = validationLogin(data, userData)
             let result2 = {
                 id: userData[0].id_user,
-                token: result
+                token: result,
+                level:  userData[0].level
             }
 
             res.send(result2)
@@ -27,9 +28,10 @@ module.exports = {
     },
     logOut: (req,res)=>{
             const token = req.headers['authorization']
+            console.log('token', token)
             var decoded = jwt_decode(token);
-            const idUser = decoded.id_user
-                  console.log(idUser)
+            const idUser = decoded.pload.id_user
+                  console.log('token', idUser)
             offToken(idUser)
             .then(result => {
               result = {

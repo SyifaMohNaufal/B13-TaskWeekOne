@@ -5,6 +5,6 @@ const {login,logOut} = require('../controllers/login')
 
 Route
     .post('/',login)
-    .post('/out',logOut)
+    .delete('/out',logOut)
 
 module.exports = Route
